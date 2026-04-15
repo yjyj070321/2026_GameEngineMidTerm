@@ -32,10 +32,9 @@ public class PlayerController : MonoBehaviour
         pAni.SetBool("isGrounded", isGrounded);
     }
 
-    [System.Obsolete]
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
+        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
     }
 
     public void OnMove(InputValue value)
@@ -44,12 +43,11 @@ public class PlayerController : MonoBehaviour
         moveInput = input.x;
     }
 
-    [System.Obsolete]
     public void OnJump(InputValue value)
     {
         if (value.isPressed && isGrounded)
         {
-            rb.velocity = new Vector2(rb.velocity.x, 0f);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
     }
