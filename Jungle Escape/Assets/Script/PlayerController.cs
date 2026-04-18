@@ -39,6 +39,11 @@ public class PlayerController : MonoBehaviour
         {
             collision.GetComponent<LevelObject>().MoveToNextLevel();
         }
+    
+        if (collision.CompareTag("Respawn") )
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     private void FixedUpdate()
