@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine. SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -30,6 +31,14 @@ public class PlayerController : MonoBehaviour
 
         pAni.SetBool("isMove", moveInput != 0);
         pAni.SetBool("isGrounded", isGrounded);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Finish"))
+        {
+            collision.GetComponent<LevelObject>().MoveToNextLevel();
+        }
     }
 
     private void FixedUpdate()
