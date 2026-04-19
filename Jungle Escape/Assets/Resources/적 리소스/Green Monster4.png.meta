@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 08b3edd2c8911a14eb9b0b070443b004
+guid: 458c6d0291d544640bf92fed5327b877
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6215494510680931498
-    second: "\uD30C\uB780 \uC0AC\uACFC_0"
+      213: -3920086709902993266
+    second: Green Monster4_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\uD30C\uB780 \uC0AC\uACFC_0"
+      name: Green Monster4_0
       rect:
         serializedVersion: 2
-        x: 6
-        y: 6
-        width: 19
-        height: 19
+        x: 4
+        y: 9
+        width: 38
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 65309737ca02eb9a0800000000000000
-      internalID: -6215494510680931498
+      spriteID: e88908728ed0999c0800000000000000
+      internalID: -3920086709902993266
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\uD30C\uB780 \uC0AC\uACFC_0": -6215494510680931498
+      Green Monster4_0: -3920086709902993266
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

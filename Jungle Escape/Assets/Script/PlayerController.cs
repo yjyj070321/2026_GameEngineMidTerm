@@ -10,15 +10,29 @@ public class PlayerController : MonoBehaviour
     public Transform groundCheck;
     public LayerMask groundLayer;
 
+    // 무적
     public bool isInvincible = false;
     public float invincibleTime = 3f;
+
+    // 속도 증가
+    public float speedBoostMultiplier = 2f;
+    public float speedBoostTime = 3f;
+    private bool isSpeedBoosted = false;
+
+    // 점프 증가
+    public float jumpBoostMultiplier = 1.5f;
+    public float jumpBoostTime = 3f;
+    private bool isJumpBoosted = false;
 
     private Rigidbody2D rb;
     private Animator pAni;
     private SpriteRenderer spriteRenderer;
     private bool isGrounded;
     private float moveInput;
+
     private Coroutine invincibleCoroutine;
+    private Coroutine speedCoroutine;
+    private Coroutine jumpCoroutine;
 
     private void Awake()
     {
@@ -42,7 +56,12 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+        float currentSpeed = moveSpeed;
+
+        if (isSpeedBoosted)
+            currentSpeed *= speedBoostMultiplier;
+
+        rb.linearVelocity = new Vector2(moveInput * currentSpeed, rb.linearVelocity.y);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -71,11 +90,19 @@ public class PlayerController : MonoBehaviour
     {
         if (value.isPressed && isGrounded)
         {
+            float currentJump = jumpForce;
+
+            if (isJumpBoosted)
+                currentJump *= jumpBoostMultiplier;
+
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * currentJump, ForceMode2D.Impulse);
         }
     }
 
+    // =========================
+    // 무적
+    // =========================
     public void ActivateInvincibility()
     {
         if (invincibleCoroutine != null)
@@ -102,6 +129,63 @@ public class PlayerController : MonoBehaviour
         }
 
         isInvincible = false;
+        spriteRenderer.color = Color.white;
+    }
+
+    // =========================
+    // 속도 증가
+    // =========================
+    public void ActivateSpeedBoost()
+    {
+        if (speedCoroutine != null)
+            StopCoroutine(speedCoroutine);
+
+        speedCoroutine = StartCoroutine(SpeedBoostCoroutine());
+    }
+
+    IEnumerator SpeedBoostCoroutine()
+    {
+        isSpeedBoosted = true;
+
+        float timer = 0f;
+
+        while (timer < speedBoostTime)
+        {
+            spriteRenderer.color = Color.yellow;
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        isSpeedBoosted = false;
+        spriteRenderer.color = Color.white;
+    }
+
+    // =========================
+    // 점프 증가
+    // =========================
+    public void ActivateJumpBoost()
+    {
+        if (jumpCoroutine != null)
+            StopCoroutine(jumpCoroutine);
+
+        jumpCoroutine = StartCoroutine(JumpBoostCoroutine());
+    }
+
+    IEnumerator JumpBoostCoroutine()
+    {
+        isJumpBoosted = true;
+
+        float timer = 0f;
+
+        while (timer < jumpBoostTime)
+        {
+            spriteRenderer.color = Color.green;
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        isJumpBoosted = false;
         spriteRenderer.color = Color.white;
     }
 }
