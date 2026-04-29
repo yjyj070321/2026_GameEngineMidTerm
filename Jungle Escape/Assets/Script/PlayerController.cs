@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public Transform groundCheck;
     public LayerMask groundLayer;
 
+
     // 무적
     public bool isInvincible = false;
     public float invincibleTime = 3f;
@@ -34,10 +35,13 @@ public class PlayerController : MonoBehaviour
     private Coroutine speedCoroutine;
     private Coroutine jumpCoroutine;
 
+    int Score;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         pAni = GetComponent<Animator>();
+        Score = 0;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -68,6 +72,8 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("Finish"))
         {
+            HighScore. TrySet(SceneManager.GetActiveScene().buildIndex, (int)Score);
+
             collision.GetComponent<LevelObject>().MoveToNextLevel();
         }
 
@@ -132,11 +138,12 @@ public class PlayerController : MonoBehaviour
         spriteRenderer.color = Color.white;
     }
 
-    // =========================
+    /// =========================
     // 속도 증가
     // =========================
     public void ActivateSpeedBoost()
     {
+        Score += 10;
         if (speedCoroutine != null)
             StopCoroutine(speedCoroutine);
 

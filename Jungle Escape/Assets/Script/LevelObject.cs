@@ -7,6 +7,7 @@ public class LevelObject : MonoBehaviour
 
 	public void MoveToNextLevel()
 	{
+		
 		SceneManager.LoadScene(nextLevel);
 	}
 }
