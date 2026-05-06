@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     private Coroutine speedCoroutine;
     private Coroutine jumpCoroutine;
 
-    int Score;
+    public int Score;
 
     private void Awake()
     {
@@ -72,7 +72,8 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("Finish"))
         {
-            HighScore. TrySet(SceneManager.GetActiveScene().buildIndex, (int)Score);
+            //HighScore. TrySet(SceneManager.GetActiveScene().buildIndex, (int)Score);
+            StageResultSaver.SaveStage(SceneManager.GetActiveScene().buildIndex, (int)Score);
 
             collision.GetComponent<LevelObject>().MoveToNextLevel();
         }

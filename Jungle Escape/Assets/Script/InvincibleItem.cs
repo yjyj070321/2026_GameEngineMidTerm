@@ -8,6 +8,7 @@ public class InvincibleItem : MonoBehaviour
         {
             PlayerController player = collision.GetComponent<PlayerController>();
             player.ActivateInvincibility();
+            player.Score += collision.GetComponent<ItemObject>().GetPoint();
 
             Destroy(gameObject);
         }
